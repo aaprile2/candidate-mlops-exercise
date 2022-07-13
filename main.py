@@ -3,7 +3,7 @@
 from api.app import create_app
 
 
-# Run application
+#### Create and run application
 if __name__ == '__main__':
     # Instantiate application
     app = create_app()

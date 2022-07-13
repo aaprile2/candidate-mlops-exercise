@@ -3,7 +3,7 @@
 from flask import Flask
 from flask_restful import Api
 from api.resources.inference import FillMask
-from api.resources.healthcheck import HealthCheck
+from api.resources.healthcheck import HealthCheck, ExtraCheck
 
 
 # Application factory
@@ -15,5 +15,6 @@ def create_app():
     # Attach Resource classes to endpoints
     api.add_resource(FillMask, '/inference')
     api.add_resource(HealthCheck, '/healthcheck')
+    api.add_resource(ExtraCheck, '/healthcheck/extracheck')
 
     return app

@@ -39,20 +39,20 @@ class FillMask(Resource):
 
         # Check for corresponding MASK token
         if '[MASK]' not in self.input and '<mask>' not in self.input:
-            abort(500, 'ValueError: input does not contain [MASK] or <mask> tokens.')
+            abort(500, 'ValueError: input must contain [MASK] or <mask> tokens.')
         else:
             if self.model in ['bert-base-uncased', 'distilbert-base-uncased']:
                 if '[MASK]' not in self.input:
                     if '<mask>' in self.input:
                         self.input = self.input.replace('<mask>', '[MASK]')
-                    else:
+                    else: # Not necessary to include due to parent 'if' condition, but fail-safe
                         abort(500, 'ValueError: input must contain [MASK] (preferred for {}) or <mask> token.'.format(self.model))
 
             elif self.model in ['roberta-base', 'roberta-large', 'xlm-roberta-base']:
                 if '<mask>' not in self.input:
                     if '[MASK]' in self.input:
                         self.input = self.input.replace('[MASK]', '<mask>')
-                    else:
+                    else: # Not necessary to include due to parent 'if' condition, but fail-safe
                         abort(500, 'ValueError: input must contain [MASK] or <mask> (preferred for {}) token.'.format(self.model))
         
 

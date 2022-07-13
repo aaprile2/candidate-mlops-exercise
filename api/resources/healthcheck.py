@@ -1,16 +1,28 @@
-''' HEALTHCHECK RESOURCE '''
+''' HEALTHCHECK RESOURCES '''
 
 from flask import request, abort, Response
 from flask_restful import Resource
-import json
+import requests
 
 
-#### Fill-Mask resource for loading model and filling the mask
-#### the mask in the given sentence
+#### HealthCheck Resource for checking the health
+#### - Returns HTTP 200
 class HealthCheck(Resource):
-    ''' GET request for health check '''
+    ''' GET (HEAD) request for health check '''
     def get(self):
-        return '', 200
-    def head(self):
-        return 'blah', 200
-        return 'blah', 404
+        return 'HEALTHY', 200
+
+#### Extra HealthCheck Resource for checking the health
+#### of the 'transformers' model download page
+#### - Returns HTTP 200 if up and running, HTTP 404 otherwise
+class ExtraCheck(Resource):
+    ''' GET (HEAD) request for Additional HealthCheck for https://huggingface.co/models status '''
+    def get(self):
+        # Check URL
+        resp = requests.head('https://huggingface.co/models')
+
+        # Return health
+        if resp.status_code in [200, 201, 202]:
+            return 'HEALTHY', 200
+        else:
+            return 'UNHEALTHY', 404
