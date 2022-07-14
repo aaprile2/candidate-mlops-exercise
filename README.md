@@ -115,6 +115,7 @@ python -m pytest
 ```
 
 You should see the following, indiciating all tests were passed:
+
 **(LOCAL BUILD)**:
 ![Screen Shot 2022-07-14 at 3 01 57 PM](https://user-images.githubusercontent.com/49654275/179072941-54989803-6da2-4b23-85ee-21ef3277dc3a.png)
 
@@ -136,7 +137,6 @@ You should see the following, indiciating all tests were passed:
 * _api_doc.yml_ provides API Documentation in the Swagger format. This should display the documentation for all endpoints, including '/' (the dedicated documentation endpoint), when visiting them in a browser. For some reason, my browser was not rendering this, so it can be viewed in a [Swagger Editor](https://editor.swagger.io/). 
 * As seen above, I also dockerized the application and added unit tests (can be viewed in the _test_ directory). 
 
-
 ### Future Improvements
 * I would love to hit the other bonus point (creating a pipeline to automatically build and deploy the application to a server). I was reading about it at [this resource](https://docs.docker.com/language/golang/configure-ci-cd/) and would have tried it out given more time. I've never done that from scratch before (only shadowed it), so I will probably try this out soon!
 * Because NLP models are constantly being changed and removed, etc., I would think that some **DELETE** and **PUT** methods would be cool to incorporate for the accepted models list.
@@ -144,5 +144,12 @@ You should see the following, indiciating all tests were passed:
 * Based on my tests, it seems like only one Mask token is processed even if there are multiple in a sentence (which even sometimes breaks the models). I would love to see if there is anything out there or any changes I could make to the code to handle this situation.
 * Because of my issues with viewing my Swagger documentation, I would like to try out Flask RESTPlus, which provides it automatically. 
 
+### Useful Links
+* [Flask RESTful documentation](https://flask-restful.readthedocs.io/en/latest/)
+* [Health Check guide](https://koalatea.io/python-health-check/)
+* [Flasgger for API documentation](https://github.com/flasgger/flasgger)
+* [Selecting additional models](https://www.sabrepc.com/blog/Deep-Learning-and-AI/top-10-hugging-face-models-for-tensorflow)
+* [Pytest for unit testing](https://semaphoreci.com/community/tutorials/testing-python-applications-with-pytest)
+* And of course, lots of StackOverflow!!
 
 Thank you!!
