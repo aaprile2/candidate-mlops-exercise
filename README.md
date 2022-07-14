@@ -63,11 +63,15 @@ As noted above, hosting the API with a Docker image versus a locally run Python 
 ```
 curl -X POST -d '{"input": "Hello Im a [MASK] model."}' -H 'Content-Type: application/json' http://127.0.0.1:[port]/inference
 ```
+<img width="678" alt="Screen Shot 2022-07-14 at 4 36 04 PM" src="https://user-images.githubusercontent.com/49654275/179078548-e3a9f9b5-622d-447d-8e24-9f4c47601ee3.png">
+
 
 * `input' and `model`:
 ```
 curl -X POST -d '{"input": "Hello Im a [MASK] model.", "model": "roberta-base"}' -H 'Content-Type: application/json' http://127.0.0.1:[port]/inference
 ```
+<img width="678" alt="Screen Shot 2022-07-14 at 4 36 45 PM" src="https://user-images.githubusercontent.com/49654275/179078650-315ed2fc-d84a-44ea-88f5-f2ef9555392e.png">
+
 
 ### /inference/models
 **GET:** Lists the HuggingFace inference models (formatted as expected in the POST payload) currently supported by the API, as outlined in _api/resources/accepted_models.txt_. 
@@ -75,6 +79,7 @@ curl -X POST -d '{"input": "Hello Im a [MASK] model.", "model": "roberta-base"}'
 ```
 curl http://127.0.0.1:[port]/inference/models
 ```
+<img width="678" alt="Screen Shot 2022-07-14 at 4 37 31 PM" src="https://user-images.githubusercontent.com/49654275/179078764-4e3a12ec-451a-492c-8518-4579a0547498.png">
 
 
 ### /healthcheck
@@ -89,6 +94,7 @@ curl http://127.0.0.1:[port]/healthcheck
 ```
 curl -I http://127.0.0.1:[port]/healthcheck
 ```
+<img width="678" alt="Screen Shot 2022-07-14 at 4 38 16 PM" src="https://user-images.githubusercontent.com/49654275/179078874-65d1c1fa-230d-4be5-9d90-9fbbbcb524a1.png">
 
 
 ### /healthcheck/extracheck
@@ -103,6 +109,8 @@ curl http://127.0.0.1:[port]/healthcheck/extracheck
 ```
 curl -I http://127.0.0.1:[port]/healthcheck/extracheck
 ```
+
+<img width="678" alt="Screen Shot 2022-07-14 at 4 39 08 PM" src="https://user-images.githubusercontent.com/49654275/179079025-7f5cbb0d-a4ed-442f-886f-16659d528251.png">
 
 
 ## Unit Testing
