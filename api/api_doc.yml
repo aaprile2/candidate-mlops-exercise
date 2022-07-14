@@ -1,0 +1,99 @@
+swagger: "2.0"
+
+info:
+  description: "This API performs Mask Inference against a variety of Hugging Face models."
+  version: "DEV"
+  title: "Mask Inference"
+  contact:
+    email: "allisonaprile22@gmail.com"
+    
+tags:
+- name: "inference"
+  description: "Mask Inference"
+  externalDocs:
+    description: "Explore inference models"
+    url: "https://huggingface.co/models"
+- name: "healthcheck"
+  description: "API Health Check"
+
+paths:
+  /inference:
+    post:
+      tags:
+      - "inference"
+      summary: "Performs inference with given string."
+      description: "Given a string and optional model, returns a list of JSON objects containing a probability score, a token, the token string (value to fill in [MASK], and the original string with [MASK] key replaced."
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created user object"
+        required: true
+        schema:
+          $ref: "#/definitions/INF"
+      responses:
+        "201":
+          description: "Successful response"
+        "500":
+          description: "Invalid payload"
+          
+  /inference/models:
+    get:
+      tags:
+      - "inference"
+      summary: "Lists supported models."
+      description: "Lists the HuggingFace inference models (formatted as expected in the POST payload) currently supported by the API."
+      responses:
+        "200":
+          description: "Successful response"
+          schema: 
+            $ref: "#/definitions/MODS"
+  
+  /healthcheck:
+    get:
+      tags:
+      - "healthcheck"
+      summary: "Performs basic health check."
+      description: "Checks if API is functioning. Returns a HTTP 200."
+      responses:
+        "200":
+          description: "Healthy"
+  
+  /healthcheck/extracheck:
+    get:
+      tags:
+      - "healthcheck"
+      summary: "Perfoms extra health check."
+      description: "Checks if HuggingFace models download page is functioning."
+      responses:
+        "200":
+          description: "Healthy"
+        "404":
+          description: "Unhealthy"
+
+    
+definitions:
+  INF:
+    required:
+    - input
+    properties:
+      input:
+        type: "string"
+        description: "The input string. Must contain [MASK] token."
+      model:
+        type: "string"
+        description: "The inference model. See 'inference/models for options."
+    example:
+      input: "Hello I'm a [MASK] model."
+      model: "bert-base-uncased"
+      
+  MODS:
+    properties:
+      models:
+        type: "array"
+        description: "Models currently supported by the API."
+    example:
+      models: ["bert-base-uncased", "distilbert-base-uncased", "roberta-base", "roberta-large", "xlm-roberta-base"]
+
+externalDocs:
+  description: "View the source code"
+  url: "https://www.google.com"
