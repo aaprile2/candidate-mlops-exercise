@@ -2,7 +2,7 @@
 
 from flask import request, abort, Response
 from flask_restful import Resource
-import json
+from flasgger import Swagger, swag_from
 import time
 from transformers import pipeline
 
@@ -10,7 +10,7 @@ from transformers import pipeline
 with open('api/resources/accepted_models.txt') as f:
     MODELS = [line.strip() for line in f.readlines()]
 
-#### Fill-Mask resource for loading model and filling the mask
+#### Fill Mask resource for loading model and filling the mask
 #### the mask in the given sentence
 class FillMask(Resource):
     ''' Initialization; validate input '''
@@ -57,6 +57,7 @@ class FillMask(Resource):
         
 
     ''' POST request for filling the mask '''
+    @swag_from('api/api_doc.yml')
     def post(self):
         #  Load model into pipeline
         unmasker = pipeline('fill-mask', model = self.model)
@@ -72,4 +73,14 @@ class FillMask(Resource):
 
         # Return output
         return {'data': output, 'inference_time': round(end - start, 5)}, 201
+
+
+
+#### GetModels for viewing available models
+class GetModels(Resource):
+    ''' GET request for viewing available models '''
+    @swag_from('api/api_doc.yml')
+    def get(self):
+        # Return models
+        return {'models': MODELS}, 200
 

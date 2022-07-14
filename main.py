@@ -9,5 +9,5 @@ if __name__ == '__main__':
     app = create_app()
 
     # Run application
-    #app.run(host='0.0.0.0', debug=True) # -> USE THIS TO TEST DOCKER IMAGE
+    #app.run(host='0.0.0.0', debug=True) # -> USE THIS FOR DOCKER IMAGE
     app.run(debug=True) # -> USE THIS TO TEST LOCAL APPLICATION/PYTEST
